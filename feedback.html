@@ -13,7 +13,15 @@
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="interests.html">My Interests</a></li>
+                <li class="dropdown">
+                    <a>Extra</a>
+                    <ul class="dropdown-content">
+                        <a href="interests.html">Interests</a>
+                        <a href="feedback.html">Leave Feedback</a>
+                    </ul>
+                </li>
+                <li><button class="mode-toggle" onclick="toggleMode()">Switch Mode</button>
+                </li>
             </ul>
         </nav>
     </header>
@@ -67,6 +75,11 @@
                 messageText += `\nYou have rated this website ${rating} stars.`;
 
                 alert(messageText);
+            }
+
+            function toggleMode() {
+                document.body.classList.toggle('light');
+                document.body.classList.toggle('dark');
             }
         </script>
 </body>
