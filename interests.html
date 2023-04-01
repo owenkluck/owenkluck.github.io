@@ -16,39 +16,37 @@
                 <li class="dropdown">
                     <a>Extra</a>
                     <ul class="dropdown-content">
-                        <a href="interests.html">Interests</a>
-                        <a href="feedback.html">Leave Feedback</a>
+                        <li><a href="interests.html">Interests</a></li>
+                        <li><a href="feedback.html">Leave Feedback</a></li>
                     </ul>
                 </li>
-                <li><button class="mode-toggle" onclick="toggleMode()">Switch Mode</button>
-                </li>
+                <li><button class="mode-toggle" onclick="toggleMode()">Switch Mode</button></li>
             </ul>
         </nav>
     </header>
     <main>
         <section>
             <h2>Some of my favorite things</h2>
-            <p>
             <ul>
                 <li>Friends/Family</li>
                 <li class="BoldItalic">Being Active</li>
                 <li>Internet businesses / Entrepreneurship</li>
                 <li>Traveling</li>
             </ul>
-            </p>
             <form>
                 <label for="interests">What are your interests?</label><br>
                 <input type="text" id="interests" name="interests"><br>
                 <small>Enter your interests separated by commas (e.g. hiking, reading, cooking)</small><br>
                 <button type="submit">Submit</button>
             </form>
+        </section>
+    </main>
+    <script>
+        function toggleMode() {
+            document.body.classList.toggle('light');
+            document.body.classList.toggle('dark');
+        }
+    </script>
 </body>
-</main>
-<script>
-    function toggleMode() {
-        document.body.classList.toggle('light');
-        document.body.classList.toggle('dark');
-    }
-</script>
 
 </html>
