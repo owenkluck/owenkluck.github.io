@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Owen Kluck - My Favorite Movies</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Owen Kluck</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                    <a>Extra</a>
+                    <ul class="dropdown-content">
+                        <li><a href="interests.html">Interests</a></li>
+                        <li><a href="feedback.html">Leave Feedback</a></li>
+                        <li><a href="movies.html">Favorite Movies</a></li>
+                    </ul>
+                </li>
+                <li><button class="mode-toggle" onclick="toggleMode()">Switch Mode</button></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="movies-layout">
+        <section>
+            <h2>Submit Your Movie</h2>
+            <form action="submit_movie.php" method="post">
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" required><br>
+
+                <label for="imdb_score">IMDB Score:</label>
+                <input type="number" step="0.1" id="imdb_score" name="imdb_score" required><br>
+
+                <label for="summary">Summary:</label>
+                <textarea id="summary" name="summary" rows="4" cols="50" required></textarea><br>
+
+                <input type="submit" value="Submit Movie">
+            </form>
+        </section>
+        <section class="movie-section">
+            <h2>My Favorite Movies</h2>
+            <form id="sortForm">
+                <label for="sortOrder">Sort by IMDb Score:</label>
+                <select name="sortOrder" id="sortOrder">
+                    <option value="desc">Highest to Lowest</option>
+                    <option value="asc">Lowest to Highest</option>
+                </select>
+                <button type="submit">Sort</button>
+            </form>
+            <div id="movieList" class="movie-list"></div>
+        </section>
+        <section style="width: 100%;">
+            <div id="movieList" class="movie-list"></div>
+        </section>
+    </main>
+    <script>
+        function toggleMode() {
+            document.body.classList.toggle('light');
+            document.body.classList.toggle('dark');
+        }
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const sortForm = document.getElementById("sortForm");
+            const movieList = document.getElementById("movieList");
+
+            function fetchMovies(sortOrder) {
+                fetch(`fetch_movies.php?sortOrder=${sortOrder}`)
+                    .then(response => response.json())
+                    .then(movies => {
+                        movieList.innerHTML = "";
+                        const ulElement = document.createElement("ul");
+                        movies.forEach(movie => {
+                            const liElement = document.createElement("li");
+                            liElement.textContent = `${movie.title} (IMDb Score: ${movie.imdb_score})`;
+                            ulElement.appendChild(liElement);
+                        });
+                        movieList.appendChild(ulElement);
+                    });
+            }
+
+            sortForm.addEventListener("submit", (event) => {
+                event.preventDefault();
+                const sortOrder = document.getElementById("sortOrder").value;
+                fetchMovies(sortOrder);
+            });
+
+            fetchMovies("desc");
+        });
+    </script>
+</body>
+
+</html>

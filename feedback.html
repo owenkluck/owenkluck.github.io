@@ -18,6 +18,7 @@
                     <ul class="dropdown-content">
                         <a href="interests.html">Interests</a>
                         <a href="feedback.html">Leave Feedback</a>
+                        <a href="movies.html">Movies</a>
                     </ul>
                 </li>
                 <li><button class="mode-toggle" onclick="toggleMode()">Switch Mode</button>
@@ -28,7 +29,7 @@
     <main>
         <section id="feedbackform">
             <h1>Feedback Form</h1>
-            <form onsubmit="handleSubmit(event)">
+            <form action="submit_feedback.php" method="post">
                 <div>
                     <label for="message">Message:</label>
                     <textarea id="message" name="message" rows="4" cols="50"></textarea>
